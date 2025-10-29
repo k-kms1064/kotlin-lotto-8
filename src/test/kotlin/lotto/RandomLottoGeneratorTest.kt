@@ -1,6 +1,6 @@
-package lotto.domain
+package lotto
 
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.RepeatedTest
 
 class RandomLottoGeneratorTest {
@@ -12,8 +12,8 @@ class RandomLottoGeneratorTest {
         val lotto = generator.generate()
         val numbers = lotto.getNumbers()
 
-        assertThat(numbers).hasSize(6)
-        assertThat(numbers.distinct().size).isEqualTo(6)
-        assertThat(numbers.all { it in 1..45 }).isTrue()
+        Assertions.assertThat(numbers).hasSize(6)
+        Assertions.assertThat(numbers.distinct().size).isEqualTo(6)
+        Assertions.assertThat(numbers.all { it in 1..45 }).isTrue()
     }
 }

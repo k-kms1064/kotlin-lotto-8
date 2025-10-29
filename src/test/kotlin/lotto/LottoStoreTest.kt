@@ -1,7 +1,6 @@
-package lotto.domain
+package lotto
 
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class LottoStoreTest {
@@ -10,7 +9,7 @@ class LottoStoreTest {
 
     @Test
     fun `1000원 단위가 아니면 예외 발생`() {
-        assertThatThrownBy { store.buy(1500) }
+        Assertions.assertThatThrownBy { store.buy(1500) }
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("[ERROR]")
     }
@@ -18,6 +17,6 @@ class LottoStoreTest {
     @Test
     fun `구입 금액에 따라 로또를 올바른 개수만큼 발행한다`() {
         val lottos = store.buy(3000)
-        assertThat(lottos).hasSize(3)
+        Assertions.assertThat(lottos).hasSize(3)
     }
 }

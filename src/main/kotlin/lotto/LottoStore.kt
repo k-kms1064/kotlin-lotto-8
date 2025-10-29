@@ -1,4 +1,6 @@
-package lotto.domain
+package lotto
+
+import lotto.RandomLottoGenerator
 
 class LottoStore(
     private val generator: LottoGenerator = RandomLottoGenerator()
