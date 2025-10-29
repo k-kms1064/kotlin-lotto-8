@@ -1,3 +1,10 @@
 package lotto.domain
 
-class LottoStore
+class LottoStore(
+    private val generator: LottoGenerator = RandomLottoGenerator()
+) {
+
+    fun buy(amount: Int): List<Lotto> {
+        return emptyList()
+    }
+}
