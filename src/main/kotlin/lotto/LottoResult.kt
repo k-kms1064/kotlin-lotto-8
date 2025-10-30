@@ -20,4 +20,11 @@ class LottoResult(
     fun getCount(rank: Rank): Int {
         return results.getOrDefault(rank, 0)
     }
+
+    fun calculateProfitRate(totalPurchase: Int): Double {
+        val totalReward = results.entries.sumOf { (rank, count) ->
+            rank.reward.toLong() * count
+        }
+        return (totalReward.toDouble() / totalPurchase) * 100
+    }
 }
