@@ -21,4 +21,25 @@ class WinningLottoTest {
             .isInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("[ERROR]")
     }
+
+    @Test
+    fun `3개 일치 시 5등`() {
+        val winning = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val result = winning.match(Lotto(listOf(1, 2, 3, 10, 11, 12)))
+        assertThat(result).isEqualTo(Rank.FIFTH)
+    }
+
+    @Test
+    fun `5개 일치 + 보너스 번호 일치 시 2등`() {
+        val winning = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val result = winning.match(Lotto(listOf(1, 2, 3, 4, 5, 7)))
+        assertThat(result).isEqualTo(Rank.SECOND)
+    }
+
+    @Test
+    fun `6개 일치 시 1등`() {
+        val winning = WinningLotto(Lotto(listOf(1, 2, 3, 4, 5, 6)), 7)
+        val result = winning.match(Lotto(listOf(1, 2, 3, 4, 5, 6)))
+        assertThat(result).isEqualTo(Rank.FIRST)
+    }
 }
