@@ -3,7 +3,11 @@ package lotto
 import camp.nextstep.edu.missionutils.Console
 
 fun main() {
-    Application().run()
+    try {
+        Application().run()
+    } catch (e: IllegalArgumentException) {
+        println(e.message)
+    }
 }
 
 class Application {
@@ -49,11 +53,12 @@ class Application {
                     Rank.SECOND -> "5개 일치, 보너스 볼 일치"
                     else -> "${rank.matchCount}개 일치"
                 }
-                println("$matchText (${rank.reward}원) - ${result.getCount(rank)}개")
+                val formattedReward = String.format("%,d", rank.reward)
+                println("$matchText (${formattedReward}원) - ${result.getCount(rank)}개")
             }
 
         val rate = result.calculateProfitRate(totalAmount)
-        val formatted = String.format("%.1f", rate)
-        println("총 수익률은 ${formatted}%입니다.")
+        val formattedRate = String.format("%.1f", rate)
+        println("총 수익률은 ${formattedRate}%입니다.")
     }
 }
